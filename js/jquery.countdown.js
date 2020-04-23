@@ -17,16 +17,27 @@ var createDigits = function(where, options) {
   digits = [];
   intervals = [];
 
+  decodeLabel = {
+    0: 'Dias',
+    2: 'Horas',
+    4: 'Minutos',
+    6: 'Segundos',
+  }
+
   for (var i = 0; i < options.startTime.length; i++) {
     if (parseInt(options.startTime[i]) >= 0) {
       elem = $('<div id="cnt_' + counter + '" class="cntDigit" />').css({
-	height: options.digitHeight,
-	float: 'left',
-	background: 'url(\'' + options.image + '\')',
-	width: options.digitWidth
+        height: options.digitHeight,
+        float: 'left',
+        background: 'url(\'' + options.image + '\')',
+        width: options.digitWidth
       });
 
       elem.current = parseInt(options.startTime[i]);
+      if (counter % 2 === 0) {
+        elem.append(`<span class="label"><b>${decodeLabel[counter]}</b></span>`)
+      }
+
       digits.push(elem);
 
       margin(counter, -elem.current * options.digitHeight * options.digitImages);
@@ -51,13 +62,13 @@ var createDigits = function(where, options) {
 	    break;
 	  case 'm':
 	    digits[counter]._max = function(pos) {
-	      if(!mFirstPos) { mFirstPos = pos; } 
+	      if(!mFirstPos) { mFirstPos = pos; }
 	      return pos == mFirstPos ? 9 : 5;
 	    };
 	    break;
 	  case 's':
 	    digits[counter]._max = function(pos) {
-	      if(!sFirstPos) { sFirstPos = pos; } 
+	      if(!sFirstPos) { sFirstPos = pos; }
 	      return pos == sFirstPos ? 9 : 5;
 	    };
 	}
@@ -188,7 +199,7 @@ var formatCompute = function(d, options) {
 var pad = function(x){return (1e15+""+x).slice(-2)};
 
 var start = function (element) {
-	if (element.attr('started') != 'true') {	
+	if (element.attr('started') != 'true') {
 		element.attr('started', true)
 		intervals.main = setInterval(function () {
 				moveDigit(digits.length - 1, element.data('options'));

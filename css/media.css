@@ -2,8 +2,6 @@ html, body, .wrapper {
   height: 100%;
   width: 100%;
 }
-  body { background: url(../img/bg-tile.png) repeat; }
-
 .wrapper { display: table; }
 
 .cell {
@@ -15,7 +13,7 @@ html, body, .wrapper {
 }
 
 #holder {
-  width: 603px;
+  width: 600px;
   height: 383px;
   margin: auto;
 }
@@ -23,8 +21,18 @@ html, body, .wrapper {
 .cntSeparator { display: none; }
 
 .cntDigit {
-  margin-top: 148px !important;
+  position: relative;
+  margin-top: 0px !important;
+  text-align: center;
+
 }
 
-  .cntDigit#cnt_0 { margin-left: 52px; }
-  .cntDigit#cnt_2 { margin-left: 7px; }
+.cntDigit#cnt_0 { margin-left: 52px; }
+.cntDigit#cnt_2 { margin-left: 7px; }
+
+.label {
+  position: absolute;
+  bottom: -20px;
+  width: 100%;
+  left: 0px;
+}
